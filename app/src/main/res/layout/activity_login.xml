@@ -6,7 +6,7 @@ android:background="@color/auth_background"
     android:gravity="center_horizontal"
     tools:context="com.trustinno.win.jobagtrustinno.Authentication.RegisterActivity">
     <!-- Login progress -->
-<ImageView
+    <ImageView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:src="@drawable/mainlogo"
@@ -105,7 +105,7 @@ android:background="@color/auth_background"
                 android:layout_marginTop="16dp"
                 android:text="To Employer"
                 android:textStyle="bold"
-                android:background="@color/logtext_co"/>
+                android:background="@color/logtext_co"/>-->
             <Button
                 android:id="@+id/sign_in_employer_button"
                 style="?android:textAppearanceSmall"
@@ -114,8 +114,7 @@ android:background="@color/auth_background"
                 android:layout_marginTop="16dp"
                 android:background="@color/logtext_co"
                 android:text="@string/action_next"
-                android:textStyle="bold" />-->
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
-
 </RelativeLayout>

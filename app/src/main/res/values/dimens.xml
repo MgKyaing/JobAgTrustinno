@@ -8,4 +8,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_align_horizonally">8dp</dimen>
     <dimen name="text_align_vertically">5dp</dimen>
+    <dimen name="threedp">3dp</dimen>
 </resources>

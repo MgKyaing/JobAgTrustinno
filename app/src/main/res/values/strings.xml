@@ -57,8 +57,10 @@
 
     <!--  string related to employer_activity     -->
     <string name="up_text">Upload</string>
+    <string name="contactinfo">Contact Infromation</string>
     <string name="companyname_employer">Company Name</string>
     <string name="description">Description</string>
+    <string name="address">Address</string>
     <string name="position_employer">Position</string>
     <string name="employer_price_prompt">Price</string>
     <string name="job_position">Position</string>
@@ -87,7 +89,43 @@
     </string-array>
     <!--    end   employer_activity      -->
 
+    <!-- Start employer job upload -->
 
+    <string name="employer_companyprofile">Company Profile</string>
+    <string name="employer_require">Requirement</string>
+    <string name="employer_payrole">Price(eg.10000mmk)</string>
+    <string-array name="employer_city">
+        <item>Yangon</item>
+        <item>Mandalay</item>
+    </string-array>
+    <string-array name="employer_country">
+        <item>Myanmar</item>
+        <item>England</item>
+        <item>Emma Watson</item>
+    </string-array>
+    <string name="employer_location">Location</string>
+    <string-array name="employer_township">
+        <item>Sanchaung</item>
+        <item>Alone</item>
+    </string-array>
+    <!--   End employer job upload       -->
+    <!-- Start employer job profile-->
+    <string name="name">Name</string>
+    <string name="postal_code">Postal Code</string>
+    <string name="employer_profile_edit">Edit</string>
+    
+    
+    <!-- End employer job profile-->
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <string name="contactus">Contact Us</string>
     <string name="aboutus">About Us</string>
 

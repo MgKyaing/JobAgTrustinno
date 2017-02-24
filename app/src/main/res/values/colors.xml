@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#7e57c2</color>
     <color name="colorPrimaryDark"> #673ab7</color>
     <color name="auth_background">#3949ab</color>
@@ -10,8 +11,11 @@
     <color name="loginbackground">#ede7f6</color>
     <color name="yellow">#fadd04</color>
     <color name="textbar">#2979ff</color>
-    <color name="lightgreen">#63ff00</color>
+    <color name="lightgreen">#41ca12</color>
     <color name="green">#64dd17</color>
+    <color name="darkgreen">#43a047</color>
     <color name="textcolor">#263238</color>
+    <color name="notsogreen">#64dd17</color>
+    <color name="greentest">#01de2d</color>
 
 </resources>

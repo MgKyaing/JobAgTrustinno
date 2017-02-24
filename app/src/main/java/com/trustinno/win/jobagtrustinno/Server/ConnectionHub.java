@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ConnectionHub {
     private static final String TAG = "ConnectionHub";
-    private static final String SERVER_URL = "http://myanmar-online.com/";
+    private static final String SERVER_URL = "http://goldenictsolutions.com/";
     private static final String token= LoginActivity.token;
 
 
@@ -56,7 +56,6 @@ public class ConnectionHub {
 
             @Override
             public void onFailure(Call<ServerResponse> call, Throwable t) {
-
 
                 Log.e(TAG, "Failure " + t.getMessage());
                 BusProvider.getInstance().post(new ErrorEvent(-2, t.getMessage()));
@@ -100,7 +99,7 @@ public class ConnectionHub {
             }
         });
     }
-
+//TODO to fixed login server response app crash error
 //
 //    public void getemployerjob(String name, String company_name, String moblie_no, String contact_no, String user_email, String normal_email, String address, String township, String postal_code, int city, int country, String website, String description) {
 //

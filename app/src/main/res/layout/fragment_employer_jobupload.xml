@@ -4,10 +4,190 @@
     android:layout_height="match_parent"
     tools:context="com.trustinno.win.jobagtrustinno.Employer.Employer_jobupload">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/employer_jobupload_firstlinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/darkgreen"
+            android:elevation="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_align_vertically"
+                android:gravity="center"
+                android:text="@string/employer_companyprofile"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/employer_companyname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/text_align_vertically"
+                android:layout_marginRight="@dimen/text_align_vertically"
+                android:hint="@string/companyname_employer"
+                android:textColor="@color/white" />
+
+            <EditText
+                android:id="@+id/employer_jobtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/text_align_vertically"
+                android:layout_marginRight="@dimen/text_align_vertically"
+                android:hint="@string/address"
+                android:textColor="@color/white" />
+
+            <EditText
+                android:id="@+id/employer_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_align_horizonally"
+                android:layout_marginLeft="@dimen/text_align_vertically"
+                android:layout_marginRight="@dimen/text_align_vertically"
+                android:hint="@string/contactinfo"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/employer_jobupload_secondlinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/employer_jobupload_firstlinear"
+            android:layout_margin="10dp"
+            android:background="@color/darkgreen"
+            android:elevation="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_align_vertically"
+                android:gravity="center"
+                android:text="@string/employer_require"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/employer_jobposition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/text_align_vertically"
+                android:layout_marginRight="@dimen/text_align_vertically"
+                android:focusableInTouchMode="true"
+                android:hint="@string/job_position"
+                android:textColor="@color/white" />
+
+            <EditText
+                android:id="@+id/employer_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/text_align_vertically"
+                android:layout_marginRight="@dimen/text_align_vertically"
+                android:hint="@string/description"
+                android:textColor="@color/white" />
+
+            <EditText
+                android:id="@+id/employer_payrole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/text_align_vertically"
+                android:layout_marginRight="@dimen/text_align_vertically"
+                android:hint="@string/employer_payrole"
+                android:textColor="@color/white" />
+
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_align_vertically"
+                android:entries="@array/occupation_array"
+                android:textColor="@color/white" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_align_vertically"
+                android:entries="@array/employer_jobtype_array"
+                android:paddingBottom="@dimen/fab_margin"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/employer_jobupload_thirdlinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/employer_jobupload_secondlinear"
+            android:layout_margin="10dp"
+            android:background="@color/darkgreen"
+            android:elevation="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_align_vertically"
+                android:gravity="center"
+                android:text="@string/employer_location"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_align_vertically"
+                android:entries="@array/employer_country"
+                android:textColor="@color/white" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_align_vertically"
+                android:entries="@array/employer_city"
+                android:textColor="@color/white" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_align_vertically"
+                android:entries="@array/employer_township"
+                android:paddingBottom="@dimen/fab_margin"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/employer_jobupload_thirdlinear"
+            android:layout_margin="10dp"
+            android:elevation="10dp"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:background="@color/auth_background"
+                android:elevation="10dp"
+                android:text="@string/up_text"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </RelativeLayout>
 </FrameLayout>

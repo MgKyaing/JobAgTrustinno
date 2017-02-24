@@ -30,8 +30,6 @@
             android:theme="@style/Theme"
             android:name=".Authentication.RegisterActivity"
             android:label="@string/title_activity_register" />
-        <activity android:name=".Employer.EmployerCV" />
-        <activity android:name=".Employer.Employer_profile" />
         <activity
             android:name=".Employer.Employer"
             android:label="@string/title_activity_employer"
