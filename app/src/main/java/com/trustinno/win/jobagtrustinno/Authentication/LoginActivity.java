@@ -23,6 +23,9 @@ import com.trustinno.win.jobagtrustinno.Server.BusProvider;
 import com.trustinno.win.jobagtrustinno.Server.ConnectionHub;
 import com.trustinno.win.jobagtrustinno.Server.ErrorEvent;
 import com.trustinno.win.jobagtrustinno.Server.ServerEvent;
+import com.trustinno.win.jobagtrustinno.datastore.User;
+
+import java.util.List;
 
 /**
  * A login screen that offers login via email/password.
@@ -49,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         // Set up the login form.
         ImageView myImageView = (ImageView) findViewById(R.id.loginlogo);
-        Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.animator.fade_in);
+        Animation myFadeInAnimation = AnimationUtils.loadAnimation(LoginActivity.this, R.animator.fade_in);
         myImageView.startAnimation(myFadeInAnimation);
 
       employer_sign_in_button = (Button) findViewById(R.id.sign_in_employer_button);
@@ -143,10 +146,13 @@ public class LoginActivity extends AppCompatActivity {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
-        } else {
+        }
+
+        else {
+
+
             mEmailView = (EditText) findViewById(R.id.login_email);
             mPasswordView = (EditText) findViewById(R.id.login_password);
-
             email_sign_in_button = (Button) findViewById(R.id.email_sign_in_button);
             email_sign_in_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -172,14 +178,26 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "blabla", Toast.LENGTH_LONG).show();
         }
 
-       if (serverEvent.getServerResponse().getToken() != null){
-               Toast.makeText(getApplicationContext(), "Success ServerEvent Respond" + serverEvent.getServerResponse(), Toast.LENGTH_SHORT).show();
-            //List<User> user = serverEvent.getServerResponse().getUserList();
-            //User users = user.get(0);
-           // userId = users.getId();
+       if (serverEvent.getServerResponse() != null){
+            List<User> user = serverEvent.getServerResponse().getUserList();
+            User users = user.get(0);
+            userId = users.getId();
+            userlogin_name=users.getuser_name();
+           rdoType=users.getuser_type();
 
+           if (rdoType ==1){
             Intent intent=new Intent(LoginActivity.this,Employer.class);
-            startActivity(intent);
+            intent.putExtra("employerid",userId);
+            intent.putExtra("employername",userlogin_name);
+                startActivity(intent);
+            }
+
+           else if (rdoType == 2)
+            {
+                Toast.makeText(getApplicationContext(),"Hey your must be 1 not"+rdoType,Toast.LENGTH_LONG).show();
+
+            }
+
             }
 
           //  Toast.makeText(getApplicationContext(), userId, Toast.LENGTH_LONG).show();
