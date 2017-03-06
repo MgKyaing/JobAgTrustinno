@@ -11,6 +11,10 @@
             android:icon="@drawable/employer_cv"
             android:title="ViewCV" />
         <item
+            android:id="@+id/nav_employer_comprofile"
+            android:icon="@drawable/employer_profile"
+            android:title="Company Profile" />
+        <item
             android:id="@+id/nav_employer_profile"
             android:icon="@drawable/employer_profile"
             android:title="Profile" />

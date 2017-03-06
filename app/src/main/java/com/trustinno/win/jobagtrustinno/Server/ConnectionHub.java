@@ -1,12 +1,13 @@
 package com.trustinno.win.jobagtrustinno.Server;
 
 import android.util.Log;
-
 import com.squareup.otto.Produce;
 import com.trustinno.win.jobagtrustinno.Authentication.LoginActivity;
 import com.trustinno.win.jobagtrustinno.Authentication.login;
 import com.trustinno.win.jobagtrustinno.Authentication.register;
+import com.trustinno.win.jobagtrustinno.Employer.Employer_profile;
 import com.trustinno.win.jobagtrustinno.Interface.Interface;
+import com.trustinno.win.jobagtrustinno.datastore.empproput;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -16,6 +17,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.trustinno.win.jobagtrustinno.Authentication.LoginActivity.token;
+
 /**
  * Created by zarni on 1/25/17.
  */
@@ -23,8 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ConnectionHub {
     private static final String TAG = "ConnectionHub";
     private static final String SERVER_URL = "http://goldenictsolutions.com/";
-    private static final String token= LoginActivity.token;
-
+//    private static final String token= LoginActivity.token;
 
     public void loginPost(String login_name, String password) {
 
@@ -99,6 +101,84 @@ public class ConnectionHub {
             }
         });
     }
+
+
+    public void employerprofile(String user_id,String token ) {
+
+        final HttpLoggingInterceptor register = new HttpLoggingInterceptor();
+        register.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(register);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(httpClient.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(SERVER_URL).build();
+
+        Interface service = retrofit.create(Interface.class);
+
+        Call<ServerResponse> call = service.employerprofile(user_id,token);
+        call.enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                // response.isSuccessful() is true if the response code is 2xx
+                Log.e(TAG, "Success" + response.code());
+                Log.e(TAG, "Success" + response.body());
+                BusProvider.getInstance().post(new ServerEvent(response.body()));
+                Log.e(TAG, "Success" + response.message());
+                Log.e(TAG, "Success");
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                // handle execution failures like no internet connectivity
+                Log.e(TAG, "Failure " + t.getMessage());
+                BusProvider.getInstance().post(new ErrorEvent(-2, t.getMessage()));
+            }
+        });
+    }
+
+    public void employerprofilesecond(String id,String token,String name, String mobile_no, String email, String address, int township, String postal_code, int city, int country) {
+
+        final HttpLoggingInterceptor register = new HttpLoggingInterceptor();
+        register.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(register);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(httpClient.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(SERVER_URL).build();
+
+        Interface service = retrofit.create(Interface.class);
+
+        Call<ServerResponse> call = service.employerprofilesecond(id,token,new empproput(name,mobile_no,email,address,township,postal_code,city,country));
+        call.enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                // response.isSuccessful() is true if the response code is 2xx
+                Log.e(TAG, "Success" + response.code());
+                Log.e(TAG, "Success" + response.body());
+                BusProvider.getInstance().post(new ServerEvent(response.body()));
+                Log.e(TAG, "Success" + response.message());
+                Log.e(TAG, "Success");
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                // handle execution failures like no internet connectivity
+                Log.e(TAG, "Failure " + t.getMessage());
+                BusProvider.getInstance().post(new ErrorEvent(-2, t.getMessage()));
+            }
+        });
+    }
+
+
+
+
+
+
+
 //TODO to fixed login server response app crash error
 //
 //    public void getemployerjob(String name, String company_name, String moblie_no, String contact_no, String user_email, String normal_email, String address, String township, String postal_code, int city, int country, String website, String description) {
@@ -143,4 +223,5 @@ public class ConnectionHub {
     public ErrorEvent produceErrorEvent(int errorCode, String errorMsg) {
         return new ErrorEvent(errorCode, errorMsg);
     }
+
 }

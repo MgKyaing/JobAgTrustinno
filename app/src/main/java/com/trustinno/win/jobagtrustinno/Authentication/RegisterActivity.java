@@ -20,8 +20,8 @@ import com.trustinno.win.jobagtrustinno.Server.ServerEvent;
 /**
  * A login screen that offers login via email/password.
  */
-public class RegisterActivity extends AppCompatActivity {
 
+public class RegisterActivity extends AppCompatActivity {
 
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView, Telephone_no, Category_Id, mConfirmpassword;
@@ -63,10 +63,8 @@ public class RegisterActivity extends AppCompatActivity {
         //         email = mEmailView.getText().toString();
         //       password = mPasswordView.getText().toString();
         //       useRegister(login_name, email, password, user_type);
-
         //     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         //   startActivity(intent);
-
       //  mLoginFormView = findViewById(R.id.login_form);
     //    mProgressView = findViewById(R.id.login_progress);
     }

@@ -183,13 +183,16 @@ public class LoginActivity extends AppCompatActivity {
             User users = user.get(0);
             userId = users.getId();
             userlogin_name=users.getuser_name();
+            token=serverEvent.getServerResponse().getToken();
            rdoType=users.getuser_type();
 
            if (rdoType ==1){
             Intent intent=new Intent(LoginActivity.this,Employer.class);
             intent.putExtra("employerid",userId);
             intent.putExtra("employername",userlogin_name);
+               intent.putExtra("apptoken",token);
                 startActivity(intent);
+
             }
 
            else if (rdoType == 2)

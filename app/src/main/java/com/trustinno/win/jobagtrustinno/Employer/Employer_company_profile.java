@@ -7,12 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.trustinno.win.jobagtrustinno.R;
 
 public class Employer_company_profile extends Fragment {
 
     public Employer_company_profile() {
+
 
 
     }

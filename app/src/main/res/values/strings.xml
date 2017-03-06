@@ -109,10 +109,23 @@
         <item>Alone</item>
     </string-array>
     <!--   End employer job upload       -->
+    <!--   Start Employer companyprofile -->
+
+    <string name="employer_postalcode">PostalCode</string>
+    <string name="employer_website">Website</string>
+
+    <!--   End Employer companyprofile -->
+
+
+
+
+
+
     <!-- Start employer job profile-->
     <string name="name">Name</string>
     <string name="postal_code">Postal Code</string>
     <string name="employer_profile_edit">Edit</string>
+
 
 
     <!-- End employer job profile-->
