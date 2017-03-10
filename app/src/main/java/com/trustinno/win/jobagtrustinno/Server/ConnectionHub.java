@@ -7,6 +7,7 @@ import com.trustinno.win.jobagtrustinno.Authentication.login;
 import com.trustinno.win.jobagtrustinno.Authentication.register;
 import com.trustinno.win.jobagtrustinno.Employer.Employer_profile;
 import com.trustinno.win.jobagtrustinno.Interface.Interface;
+import com.trustinno.win.jobagtrustinno.datastore.companyprofile;
 import com.trustinno.win.jobagtrustinno.datastore.empproput;
 
 import okhttp3.OkHttpClient;
@@ -67,7 +68,7 @@ public class ConnectionHub {
 
     }
 
-    public void registerPost(String login_name, String email,String telephone_no, String password, String user_type,String category_id) {
+    public void registerPost(String login_name, String email,String telephone_no, String password, String user_type,int category_id) {
 
         final HttpLoggingInterceptor register = new HttpLoggingInterceptor();
         register.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -173,6 +174,189 @@ public class ConnectionHub {
         });
     }
 
+
+    public void companyprofile(String company_name, String address, int township_id, String postal_code, int city_id, int country_id, String mobile_no, String email, String website, String description){
+        final HttpLoggingInterceptor register = new HttpLoggingInterceptor();
+        register.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(register);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(httpClient.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(SERVER_URL).build();
+
+        Interface service = retrofit.create(Interface.class);
+
+        Call<ServerResponse> call = service.companyprofile(token,new companyprofile(company_name,address,township_id,postal_code,city_id,country_id,mobile_no,email,website,description));
+        call.enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                // response.isSuccessful() is true if the response code is 2xx
+                Log.e(TAG, "Success" + response.code());
+                Log.e(TAG, "Success" + response.body());
+                BusProvider.getInstance().post(new ServerEvent(response.body()));
+                Log.e(TAG, "Success" + response.message());
+                Log.e(TAG, "Success");
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                // handle execution failures like no internet connectivity
+                Log.e(TAG, "Failure " + t.getMessage());
+                BusProvider.getInstance().post(new ErrorEvent(-2, t.getMessage()));
+            }
+        });
+    }
+
+
+    public void gettownship(int township_id_sp,String township){
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(logging);
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(httpClient.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(SERVER_URL)
+                .build();
+        Interface service = retrofit.create(Interface.class);
+        //Call<ServerResponse> call = service.post("login",username,password);
+        //Call<ServerResponse> call = service.post(username,password);
+        Call<ServerResponse> call = service.gettown(township_id_sp,township);
+        //Call<ServerResponse> call = service.post(username,password);
+        call.enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                Log.e(TAG, "Success" + response.code());
+                Log.e(TAG, "Success" + response.body());
+                Log.e(TAG, "Success" + response.message());
+                BusProvider.getInstance().post(new ServerEventSpinnerTownship(response.body()));
+                Log.e(TAG, "Success");
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                // handle execution failures like no internet connectivity
+                Log.e(TAG, "Failure "+t.getMessage());
+                BusProvider.getInstance().post(new ErrorEvent(-2, t.getMessage()));
+
+            }
+
+        });
+
+    }
+
+
+    public void getspjobcate(int cate_id_sp,String category){
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(logging);
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(httpClient.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(SERVER_URL)
+                .build();
+        Interface service = retrofit.create(Interface.class);
+        //Call<ServerResponse> call = service.post("login",username,password);
+        //Call<ServerResponse> call = service.post(username,password);
+        Call<ServerResponse> call = service.getcate(cate_id_sp,category);
+        //Call<ServerResponse> call = service.post(username,password);
+        call.enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                Log.e(TAG, "Success" + response.code());
+                Log.e(TAG, "Success" + response.body());
+                Log.e(TAG, "Success" + response.message());
+                BusProvider.getInstance().post(new ServerEventSpinnerCate(response.body()));
+                Log.e(TAG, "Success");
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                // handle execution failures like no internet connectivity
+                Log.e(TAG, "Failure "+t.getMessage());
+                BusProvider.getInstance().post(new ErrorEvent(-2, t.getMessage()));
+
+            }
+
+        });
+
+    }
+    public void getspjobtype(int jobtype_id_sp,String jobtype){
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(logging);
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(httpClient.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(SERVER_URL)
+                .build();
+        Interface service = retrofit.create(Interface.class);
+        //Call<ServerResponse> call = service.post("login",username,password);
+        //Call<ServerResponse> call = service.post(username,password);
+        Call<ServerResponse> call = service.gettype(jobtype_id_sp,jobtype);
+        //Call<ServerResponse> call = service.post(username,password);
+        call.enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                Log.e(TAG, "Success" + response.code());
+                Log.e(TAG, "Success" + response.body());
+                Log.e(TAG, "Success" + response.message());
+                BusProvider.getInstance().post(new ServerEventSpinnerCate(response.body()));
+                Log.e(TAG, "Success");
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                // handle execution failures like no internet connectivity
+                Log.e(TAG, "Failure "+t.getMessage());
+                BusProvider.getInstance().post(new ErrorEvent(-2, t.getMessage()));
+
+            }
+
+        });
+
+    }
+
+    public void getspcity(int city_id_sp,String city){
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(logging);
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(httpClient.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(SERVER_URL)
+                .build();
+        Interface service = retrofit.create(Interface.class);
+        //Call<ServerResponse> call = service.post("login",username,password);
+        //Call<ServerResponse> call = service.post(username,password);
+        Call<ServerResponse> call = service.getcity(city_id_sp,city);
+        //Call<ServerResponse> call = service.post(username,password);
+        call.enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                Log.e(TAG, "Success" + response.code());
+                Log.e(TAG, "Success" + response.body());
+                Log.e(TAG, "Success" + response.message());
+                BusProvider.getInstance().post(new ServerEventSpinnercity(response.body()));
+                Log.e(TAG, "Success");
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                // handle execution failures like no internet connectivity
+                Log.e(TAG, "Failure "+t.getMessage());
+                BusProvider.getInstance().post(new ErrorEvent(-2, t.getMessage()));
+
+            }
+
+        });
+
+    }
 
 
 

@@ -7,7 +7,9 @@ import com.trustinno.win.jobagtrustinno.Authentication.login;
 import com.trustinno.win.jobagtrustinno.Authentication.register;
 import com.trustinno.win.jobagtrustinno.Employer.Employer;
 import com.trustinno.win.jobagtrustinno.Employer.Employer_profile;
+import com.trustinno.win.jobagtrustinno.Server.ServerEvent;
 import com.trustinno.win.jobagtrustinno.Server.ServerResponse;
+import com.trustinno.win.jobagtrustinno.datastore.companyprofile;
 import com.trustinno.win.jobagtrustinno.datastore.empproput;
 
 import retrofit2.Call;
@@ -41,12 +43,36 @@ public interface Interface {
             @Field("email") String username,
             @Field("password") String password
     );*/
-
-    @GET("/api/employer/{user_id}")
-    Call<ServerResponse>employerprofile(@Path("user_id")String user_id,@Query("token")String token
-
+    @GET("/api/category")
+    Call<ServerResponse>getcate(
+      @Query("id")int cate_id,
+      @Query("category")String category
     );
 
+    @GET("/api/township")
+    Call<ServerResponse> gettown(
+            @Query("id")int  township_id_sp,
+            @Query("township")String township
+    );
+
+    @GET("/api/type")
+    Call<ServerResponse>gettype(
+        @Query("id")int jobtype_id_sp,
+        @Query("type")String jobtype
+    );
+
+
+    @GET("/api/city")
+    Call<ServerResponse>getcity(
+            @Query("id")int city_id_sp,
+            @Query("city")String city
+    );
+
+    @POST("api/company")
+    Call<ServerResponse> companyprofile(@Query("token") String token, @Body  companyprofile companyprofile);
+
+    @GET("/api/employer/{user_id}")
+    Call<ServerResponse>employerprofile(@Path("user_id")String user_id,@Query("token")String token);
 
     @PUT("/api/employer/{id}")
     Call<ServerResponse>employerprofilesecond(@Path( "id") String id ,@Query("token")String token,@Body empproput empproput);
@@ -62,9 +88,6 @@ public interface Interface {
     Call<ServerResponse> register(
             @Body register register
     );
-
-
-
     //   @GET("/api/register")
     // Call<ServerResponseRegister> pull(
     // @Query("method") String method,

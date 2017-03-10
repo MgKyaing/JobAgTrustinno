@@ -40,8 +40,19 @@
                 android:hint="@string/companyname_employer"
                 android:textColor="@color/white" />
 
+
             <EditText
-                android:id="@+id/employer_jobtitle"
+                android:id="@+id/employer_company_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_align_horizonally"
+                android:layout_marginLeft="@dimen/text_align_vertically"
+                android:layout_marginRight="@dimen/text_align_vertically"
+                android:hint="@string/prompt_email"
+                android:textColor="@color/white" />
+
+            <EditText
+                android:id="@+id/employer_companyaddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/text_align_vertically"
@@ -70,7 +81,7 @@
                 android:textColor="@color/white" />
 
             <EditText
-                android:id="@+id/employer_postalcode"
+                android:id="@+id/employer_company_postalcode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/text_align_vertically"
@@ -78,25 +89,35 @@
                 android:hint="@string/employer_postalcode"
                 android:textColor="@color/white" />
 
+            <EditText
+                android:id="@+id/employer_company_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/text_align_vertically"
+                android:layout_marginRight="@dimen/text_align_vertically"
+                android:hint="@string/description"
+                android:textColor="@color/white" />
+
+            <!--<Spinner-->
+                <!--android:id="@+id/compro_countrysp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="@dimen/text_align_vertically"-->
+                <!--android:entries="@array/employer_country"-->
+                <!--android:textColor="@color/white" />-->
+
             <Spinner
+                android:id="@+id/compro_citysp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_align_vertically"
-                android:entries="@array/employer_country"
                 android:textColor="@color/white" />
 
             <Spinner
+                android:id="@+id/compro_townshipsp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_align_vertically"
-                android:entries="@array/employer_city"
-                android:textColor="@color/white" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_align_vertically"
-                android:entries="@array/employer_township"
                 android:textColor="@color/white" />
         </LinearLayout>
 
@@ -110,6 +131,7 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/employer_compup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

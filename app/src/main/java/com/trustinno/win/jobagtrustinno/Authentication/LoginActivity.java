@@ -55,14 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         Animation myFadeInAnimation = AnimationUtils.loadAnimation(LoginActivity.this, R.animator.fade_in);
         myImageView.startAnimation(myFadeInAnimation);
 
-      employer_sign_in_button = (Button) findViewById(R.id.sign_in_employer_button);
-        employer_sign_in_button.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, Employer.class);
-                startActivity(intent);
-            }
-        });
 
         communicator = new ConnectionHub();
         linkregister = (TextView) findViewById(R.id.linkregister);

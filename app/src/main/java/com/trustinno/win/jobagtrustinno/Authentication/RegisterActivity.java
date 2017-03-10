@@ -1,14 +1,18 @@
 package com.trustinno.win.jobagtrustinno.Authentication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
@@ -16,6 +20,12 @@ import com.trustinno.win.jobagtrustinno.R;
 import com.trustinno.win.jobagtrustinno.Server.BusProvider;
 import com.trustinno.win.jobagtrustinno.Server.ConnectionHub;
 import com.trustinno.win.jobagtrustinno.Server.ServerEvent;
+import com.trustinno.win.jobagtrustinno.Server.ServerEventSpinnerCate;
+import com.trustinno.win.jobagtrustinno.Server.ServerEventSpinnercity;
+import com.trustinno.win.jobagtrustinno.datastore.SpJobCategory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A login screen that offers login via email/password.
@@ -26,20 +36,23 @@ public class RegisterActivity extends AppCompatActivity {
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView, Telephone_no, Category_Id, mConfirmpassword;
     private EditText Login_name;
-    private View mProgressView;
-    private View mLoginFormView;
     private RadioGroup usertyperadio;
-    private RadioButton emp_reg_radio1, emp_reg_radio2;
-    private String telephone_no, category_id, login_name, email, password, User_type, user_type;
+    private RadioButton emp_reg_radio1;
+    private String telephone_no, login_name, email, password,  user_type;
     private Button register_button;
     ConnectionHub communicator;
-
+    public List spcategory = new ArrayList<>();
+    private List spcategoryid=new ArrayList<>();
+    private Spinner spinner;
+    int category_id;
+    int categoryspid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         communicator = new ConnectionHub();
-
+        int cate_id = 0;
+        String category = "";
         usertyperadio = (RadioGroup) findViewById(R.id.emp_radio_group);
         emp_reg_radio1 = (RadioButton) findViewById(R.id.emp_reg_radio1);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -50,6 +63,8 @@ public class RegisterActivity extends AppCompatActivity {
         mConfirmpassword = (EditText) findViewById(R.id.confirmpassword);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email_register);
         mPasswordView = (EditText) findViewById(R.id.password);
+        postspcate(cate_id, category);
+        load_spinner();
         register_button = (Button) findViewById(R.id.register_button);
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +80,8 @@ public class RegisterActivity extends AppCompatActivity {
         //       useRegister(login_name, email, password, user_type);
         //     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         //   startActivity(intent);
-      //  mLoginFormView = findViewById(R.id.login_form);
-    //    mProgressView = findViewById(R.id.login_progress);
+        //  mLoginFormView = findViewById(R.id.login_form);
+        //    mProgressView = findViewById(R.id.login_progress);
     }
 
 
@@ -80,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String Confrimpassword = mConfirmpassword.getText().toString();
         final String Loginname = Login_name.getText().toString();
         final String Telephoneno = Telephone_no.getText().toString();
+
         boolean cancel = false;
         View focusView = null;
 
@@ -110,38 +126,97 @@ public class RegisterActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
 
+            Parsespid parsespid=new Parsespid();
 
-                    int checkedRadioButtonId = usertyperadio.getCheckedRadioButtonId();
-                    if (checkedRadioButtonId == emp_reg_radio1.getId()) {
-                        user_type = "1";
-                    } else {
-                        user_type = "2";
-                    }
-                    login_name = Login_name.getText().toString();
-                    email = mEmailView.getText().toString();
-                    telephone_no = Telephone_no.getText().toString();
-                    password=mConfirmpassword.getText().toString();
-                    category_id = "1";
-                    useRegister(login_name, email, telephone_no, password, user_type, category_id);
-                    Toast.makeText(getApplicationContext(), user_type+login_name+category_id+password+email, Toast.LENGTH_LONG).show();
+            int checkedRadioButtonId = usertyperadio.getCheckedRadioButtonId();
+            if (checkedRadioButtonId == emp_reg_radio1.getId()) {
+                user_type = "2";
+            } else {
+                user_type = "1";
+            }
+            login_name = Login_name.getText().toString();
+            email = mEmailView.getText().toString();
+            telephone_no = Telephone_no.getText().toString();
+            password = mConfirmpassword.getText().toString();
+            category_id=parsespid.getCateid();
+            categoryspid=category_id;
+            useRegister(login_name, email, telephone_no, password, user_type, categoryspid);
+            Toast.makeText(getApplicationContext(),  categoryspid+user_type , Toast.LENGTH_LONG).show();
 
-
-                }
 
         }
 
-    private void useRegister(String login_name, String email, String telephone_no, String password, String user_type, String category_id) {
+    }
+
+    public void postspcate(int cate_id, String category) {
+        communicator.getspjobcate(cate_id, category);
+    }
+
+    private void useRegister(String login_name, String email, String telephone_no, String password, String user_type, int category_id) {
         communicator.registerPost(login_name, email, telephone_no, password, user_type, category_id);
     }
+
 
     @Subscribe
     public void onServerEvent(ServerEvent serverEvent) {
 
         if (!serverEvent.getServerResponse().equals(null)) {
 
-            Toast.makeText(getApplicationContext(), "Success ServerEvent Respond" + serverEvent.getServerResponse(), Toast.LENGTH_LONG).show();
+
+            Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+            startActivity(intent);
         }
     }
+
+    @Subscribe
+    public void onServerEvent(ServerEventSpinnerCate serverEventSpinnerCate) {
+        if (!serverEventSpinnerCate.getServerResponse().equals(null)) {
+
+            List<SpJobCategory>jobCategoryList=serverEventSpinnerCate.getServerResponse().getspjobcategories();
+            for (int i=0;i<jobCategoryList.size();i++)
+            {
+                spcategory.add(jobCategoryList.get(i).getspjobcate_cate());
+                spcategoryid.add(jobCategoryList.get(i).getspjobcate_id());
+            }
+//            Toast.makeText(getApplicationContext(), (CharSequence) spcategory,Toast.LENGTH_LONG).show();
+            ArrayAdapter<String> adapter=new ArrayAdapter<String>(RegisterActivity.this,android.R.layout.simple_spinner_dropdown_item,spcategory);
+          Spinner  spinner=(Spinner)findViewById(R.id.register_spinner);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+
+        } else if (serverEventSpinnerCate.getServerResponse().equals(null)) {
+            Toast.makeText(getApplicationContext(), "Failed to load spinner please check your internet connection", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void load_spinner(){
+        spinner=(Spinner)findViewById(R.id.register_spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int jobcate_id=  spcategoryid.size();
+
+                    Parsespid parsespid=new Parsespid();
+                parsespid.setCateid(jobcate_id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public static class Parsespid{
+        private static int cateid;
+            public void setCateid(int jobcate_id){
+                    cateid=jobcate_id;
+            }
+            public int getCateid(){return cateid;}
+
+    }
+
+
 
     @Override
     public void onResume() {
@@ -149,30 +224,13 @@ public class RegisterActivity extends AppCompatActivity {
         BusProvider.getInstance().register(this);
     }
 
+
     @Override
     public void onPause() {
         super.onPause();
         BusProvider.getInstance().unregister(this);
     }
 
-    /*        public void Chooseusertype() {
-
-            int checkedRadioButtonId=usertyperadio.getCheckedRadioButtonId();
-            if (checkedRadioButtonId== -1)
-            {
-                Toast.makeText(getApplicationContext(),0, Toast.LENGTH_LONG).show();
-            }
-            else if (checkedRadioButtonId == R.id.emp_reg_radio1) {
-                User_type="1";
-
-            }
-            else if (checkedRadioButtonId ==R.id.emp_reg_radio2)
-            {
-                User_type="2";
-            }
-                user_type=User_type;
-           // Toast.makeText(getApplicationContext(),"this is"+rdo_type,Toast.LENGTH_LONG).show();
-        }*/
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;

@@ -1,9 +1,13 @@
 package com.trustinno.win.jobagtrustinno.Server;
 import com.google.gson.annotations.SerializedName;
+import com.trustinno.win.jobagtrustinno.datastore.City;
+import com.trustinno.win.jobagtrustinno.datastore.SpJobCategory;
+import com.trustinno.win.jobagtrustinno.datastore.Township;
 import com.trustinno.win.jobagtrustinno.datastore.User;
 import com.trustinno.win.jobagtrustinno.datastore.employer;
 import com.trustinno.win.jobagtrustinno.datastore.employerprofile;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  * Created by zarni on 1/30/17.
@@ -27,6 +31,17 @@ public class ServerResponse {
     @SerializedName("telephone_no")
     private String  telephone_no;
 
+    @SerializedName("jobtype")
+    private ArrayList<Jobtype>jobtype=null;
+    @SerializedName("city")
+    private ArrayList<City> city = null;
+
+    @SerializedName("township")
+    private ArrayList<Township>townships =null;
+
+    @SerializedName("jobcategory")
+    private ArrayList<SpJobCategory>categories=null;
+
 
     @SerializedName("error")
     private Boolean error;
@@ -47,6 +62,20 @@ public class ServerResponse {
         this.telephone_no=telephone_no;
 
     }
+    public ArrayList<SpJobCategory>getspjobcategories(){
+    return categories;
+    }
+
+    public ArrayList<Township>getTownships(){
+        return townships;
+    }
+
+    public ArrayList<City> getresult() {
+        return city;
+    }
+
+    public ArrayList<Jobtype>getJobtype(){return jobtype;}
+
     public List<employerprofile> getEmployerprofiles(){return employerprofiles;}
 
     public List<User> getUserList(){
@@ -63,6 +92,9 @@ public class ServerResponse {
 
     public Boolean getError() {
         return error;
+    }
+    public int getStatusCode(){
+        return statusCode;
     }
 
     public List<employer>getEmployerprofile(){

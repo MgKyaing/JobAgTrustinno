@@ -71,20 +71,19 @@
                 android:hint="@string/postal_code" />
 
 
-            <Spinner
-                android:id="@+id/employer_country_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_align_vertically"
-                android:entries="@array/employer_country"
-                android:textColor="@color/white" />
+            <!--<Spinner-->
+                <!--android:id="@+id/employer_country_spinner"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="@dimen/text_align_vertically"-->
+                <!--android:entries="@array/employer_country"-->
+                <!--android:textColor="@color/white" />-->
 
             <Spinner
                 android:id="@+id/employer_city_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_align_vertically"
-                android:entries="@array/employer_city"
                 android:textColor="@color/white" />
 
             <Spinner
@@ -92,7 +91,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_align_vertically"
-                android:entries="@array/employer_township"
                 android:paddingBottom="@dimen/fab_margin"
                 android:textColor="@color/white" />
 

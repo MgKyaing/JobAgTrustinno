@@ -97,24 +97,7 @@ android:background="@color/auth_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white" />
-            <!--<Button
-                android:id="@+id/sign_in_employer_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="To Employer"
-                android:textStyle="bold"
-                android:background="@color/logtext_co"/>-->
-            <Button
-                android:id="@+id/sign_in_employer_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/logtext_co"
-                android:text="@string/action_next"
-                android:textStyle="bold" />
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

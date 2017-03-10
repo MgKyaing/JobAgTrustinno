@@ -8,13 +8,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
 
+            android:id="@+id/employer_jobupload_firstlinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingBottom="10dp"
+            android:background="@color/darkgreen"
+            android:elevation="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_align_vertically"
+                android:gravity="center"
+                android:text="@string/companyname_employer"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+
+            <Spinner
+                android:id="@+id/empjobup_sp_cname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_align_vertically"
+                android:textColor="@color/white"
+                />
+         </LinearLayout>
         <LinearLayout
 
             android:id="@+id/employer_jobupload_secondlinear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:layout_below="@+id/employer_jobupload_firstlinear"
             android:background="@color/darkgreen"
             android:elevation="10dp"
             android:orientation="vertical">
@@ -96,25 +126,24 @@
                 android:textStyle="bold" />
 
 
+            <!--<Spinner-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="@dimen/text_align_vertically"-->
+                <!--android:textColor="@color/white" />-->
+
             <Spinner
+                android:id="@+id/empjobup_sp_jocate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_align_vertically"
-                android:entries="@array/employer_country"
                 android:textColor="@color/white" />
 
             <Spinner
+                android:id="@+id/empjobup_sp_jobtype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_align_vertically"
-                android:entries="@array/employer_city"
-                android:textColor="@color/white" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_align_vertically"
-                android:entries="@array/employer_township"
                 android:paddingBottom="@dimen/fab_margin"
                 android:textColor="@color/white" />
         </LinearLayout>

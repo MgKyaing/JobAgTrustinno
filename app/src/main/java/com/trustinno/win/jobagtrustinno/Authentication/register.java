@@ -11,9 +11,9 @@ public class register {
     final String telephone_no;
     final String password;
     final  String  user_type;
-    final String category_id;
+    final int category_id;
 
-    public register(String login_name, String email, String telephone_no,String password, String user_type,String category_id){
+    public register(String login_name, String email, String telephone_no,String password, String user_type,int category_id){
 
         this.login_name=login_name;
         this.email=email;

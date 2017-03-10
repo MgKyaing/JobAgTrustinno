@@ -115,7 +115,6 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginBottom="@dimen/text_align_vertically"
-                android:entries="@array/occupation_array"
                 />
 
 
